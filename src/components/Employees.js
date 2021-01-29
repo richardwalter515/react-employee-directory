@@ -1,6 +1,28 @@
 import React, { Component } from "react";
+import "./Employees.css";
+import API from "../utils/API";
 
 class Employees extends Component {
+    state = {
+        // search: "",
+        results: []
+      };
+
+    componentDidMount() {
+        API.seeEmployees()
+        .then(res => {
+            let employees = (res.data.results);
+            console.log("employees: ", employees)
+            {employees.map(result => (
+                <li className="list-group-item">
+                  First Name: {result.name.first}
+                </li>
+              ))}
+        })
+        .catch(err => console.log(err));
+      }
+
+    
   // Setting the component's initial state
 //   state = {
 //     firstName: "",
@@ -38,9 +60,12 @@ class Employees extends Component {
 //   };
 
   render() {
-    // Notice how each input has a `value`, `name`, and `onChange` prop
     return (
-        <h1>Test</h1>
+        <div class="jumbotron jumbotron-fluid" id="header">
+            <div class="container">
+                <h1 class="display-4 text-center"><u>Employee Directory</u></h1>
+            </div>
+        </div>
     //   <div>
     //     <p>
     //       Hello {this.state.firstName} {this.state.lastName}
