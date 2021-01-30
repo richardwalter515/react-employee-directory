@@ -4,23 +4,19 @@ import API from "../utils/API";
 
 class Employees extends Component {
     state = {
-        // search: "",
-        results: []
+        foundEmployees: []
       };
+
 
     componentDidMount() {
         API.seeEmployees()
-        .then(res => {
-            let employees = (res.data.results);
-            console.log("employees: ", employees)
-            {employees.map(result => (
-                <li className="list-group-item">
-                  First Name: {result.name.first}
-                </li>
-              ))}
-        })
-        .catch(err => console.log(err));
-      }
+        .then(res => 
+            this.setState({ foundEmployees: res.data.results }, () => {
+              console.log("foundemployeesStat", this.state.foundEmployees)
+            })
+        ).catch(err => console.log(err));
+      };
+
 
     
   // Setting the component's initial state
@@ -58,43 +54,38 @@ class Employees extends Component {
 //       password:""
 //     });
 //   };
+//.sort//
 
   render() {
     return (
+<>
         <div class="jumbotron jumbotron-fluid" id="header">
             <div class="container">
                 <h1 class="display-4 text-center"><u>Employee Directory</u></h1>
             </div>
         </div>
-    //   <div>
-    //     <p>
-    //       Hello {this.state.firstName} {this.state.lastName}
-    //     </p>
-    //     <form className="form">
-    //       <input
-    //         value={this.state.firstName}
-    //         name="firstName"
-    //         onChange={this.handleInputChange}
-    //         type="text"
-    //         placeholder="First Name"
-    //       />
-    //       <input
-    //         value={this.state.lastName}
-    //         name="lastName"
-    //         onChange={this.handleInputChange}
-    //         type="text"
-    //         placeholder="Last Name"
-    //       />
-    //         <input
-    //         value={this.state.password}
-    //         name="password"
-    //         onChange={this.handleInputChange}
-    //         type="text"
-    //         placeholder="Password"
-    //       />
-    //       <button onClick={this.handleFormSubmit}>Submit</button>
-    //     </form>
-    //   </div>
+        <thead>
+          <tr>
+            <th scope="col">Picture</th>//buttons here that will tie to sorting and filtering funcitons above//
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Birthdate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.foundEmployees.map((employee) => (
+            <tr>
+              <td><img alt={`${employee.name.first} ${employee.name.last}`} src={employee.picture.thumbnail} /></td>
+              <td>{`${employee.name.first} ${employee.name.last}`}</td>
+              <td>{employee.phone}</td>
+              <td>{employee.email}</td>
+              {/* <td>{moment(employee.dob.date).format("MM-DD-YYYY")}</td> */}
+            </tr>
+          ))};
+        </tbody>
+      
+      </>
     );
   }
 }
