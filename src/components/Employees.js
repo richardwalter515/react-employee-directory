@@ -17,45 +17,6 @@ class Employees extends Component {
         ).catch(err => console.log(err));
       };
 
-
-    
-  // Setting the component's initial state
-//   state = {
-//     firstName: "",
-//     lastName: "",
-//     password: ""
-//   };
-
-//   handleInputChange = event => {
-//     // Getting the value and name of the input which triggered the change
-//     const value = event.target.value;
-//     const name = event.target.name;
-
-//     // Updating the input's state
-//     this.setState({
-//       [name]: value
-//     });
-//   };
-
-//   handleFormSubmit = event => {
-//     // Preventing the default behavior of the form submit (which is to refresh the page)
-//     event.preventDefault();
-//     if (!this.state.firstName || !this.state.lastName) {
-//       alert("Fill out your first and last name please!")
-//     } else {
-//       alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
-      
-//     }
-
-//     // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
-//     this.setState({
-//       firstName: "",
-//       lastName: "",
-//       password:""
-//     });
-//   };
-//.sort//
-
   render() {
     return (
 <>
@@ -66,11 +27,10 @@ class Employees extends Component {
         </div>
         <thead>
           <tr>
-            <th scope="col">Picture</th>//buttons here that will tie to sorting and filtering funcitons above//
-            <th scope="col">Name</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Birthdate</th>
+            <th scope="col" class="tableHead">Picture</th>
+            <th scope="col" class="tableHead">Name</th>
+            <th scope="col" class="tableHead">Phone</th>
+            <th scope="col" class="tableHead">Email</th>
           </tr>
         </thead>
         <tbody>
@@ -80,7 +40,6 @@ class Employees extends Component {
               <td>{`${employee.name.first} ${employee.name.last}`}</td>
               <td>{employee.phone}</td>
               <td>{employee.email}</td>
-              {/* <td>{moment(employee.dob.date).format("MM-DD-YYYY")}</td> */}
             </tr>
           ))};
         </tbody>
